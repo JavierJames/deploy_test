@@ -71,7 +71,7 @@ def _merge_two_branches(target_branch, reference_branch):
     stream = os.popen('git pull origin')
 
     #Make sure we are on the target branch and it is up to date
-    stream = os.popen('git checkout' +' ' + target_branch )
+    stream = os.popen('git checkout' +' ' + target_branch)
     stream = os.popen('git pull origin')
 
 
@@ -156,11 +156,16 @@ def finalize_release(release_name):
     """     
     try:
         if(release_name):
-            print('Finalizing release:'+release_name)
+            print('Finalizing release:'+ release_name)
             target_branch_name = release_branch_name_prefix + release_name
             
             #ensure there are no modified files 
-            stream = os.popen('git stash')
+            # stream = os.popen('git stash')
+
+            #Ensure release branch is up to date 
+            stream = os.popen('git checkout' + ' ' + target_branch_name)
+            stream = os.popen('git pull origin') 
+            stream = os.popen('git push origin')
 
             #Ensure the develop branch is up todate 
             stream = os.popen('git checkout' + ' ' + develop_branch_name)
@@ -175,12 +180,12 @@ def finalize_release(release_name):
             # stream = os.popen('git flow release finish' + ' ' + release_name )
             
             #Merge release branch to develop branch and update server
-            _merge_two_branches(target_branch_name, develop_branch_name)
+            _merge_two_branches(develop_branch_name, target_branch_name)
             stream = os.popen('git checkout' + ' ' + develop_branch_name)
             stream = os.popen('git push origin')
 
             #Merge release branch to mastert branch and update server
-            _merge_two_branches(target_branch_name, master_branch_name)
+            _merge_two_branches(master_branch_name, target_branch_name)
             stream = os.popen('git checkout' + ' ' + master_branch_name)
             stream = os.popen('git push origin')
 
@@ -241,7 +246,8 @@ def _init_dir (git_dir):
 
 def main():
    # _init_dir('/home/javier/repo/deploy_test/')
-   start_release('v1.0.0')
+   # start_release('v1.0.0')
+   finalize_release('v1.0.0')
 
 
 if __name__ == '__main__':
