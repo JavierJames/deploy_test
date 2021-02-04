@@ -241,7 +241,7 @@ def _init_dir (git_dir):
 
 def main():
    # _init_dir('/home/javier/repo/deploy_test/')
-   start_release('release_test')
+   start_release('v1.0.0')
 
 
 if __name__ == '__main__':
