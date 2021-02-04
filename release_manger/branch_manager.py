@@ -240,8 +240,6 @@ def _init_dir (git_dir):
 
 
 def main():
-   print('starting')
-   
    # _init_dir('/home/javier/repo/deploy_test/')
    start_release('release_test')
 
