@@ -17,8 +17,8 @@ jobs:
             echo "running test"
 
   build:
-    requires:
-      -test
+    # requires:
+    #   -test
     docker:
       - image: rikorose/gcc-cmake    
     steps:
@@ -36,9 +36,9 @@ workflows:
     jobs:
       # - welcome/run
       - test
-      - build
-      #   requires: 
-      #     - test       
+      - build:
+        requires: 
+          - test       
       #   filters:
       #     branches:
       #       only:
