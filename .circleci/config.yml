@@ -7,6 +7,7 @@ version: 2
 #   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
+  
   test:
     docker:
       - image: rikorose/gcc-cmake    
@@ -17,8 +18,6 @@ jobs:
             echo "running test"
 
   build:
-    # requires:
-    #   -test
     docker:
       - image: rikorose/gcc-cmake    
     steps:
@@ -27,23 +26,24 @@ jobs:
           command: |
             echo "running specific branch tasks"
 
-# Orchestrate or schedule a set of jobs
+ 
+  deploy:
+    docker:
+      - image: rikorose/gcc-cmake    
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo "Deploying firmware"
+
 workflows:
   version: 2
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  build-and-deploy:
     jobs:
-      # - welcome/run
       - test
       - build:
-        requires: 
-          - test       
-      #   filters:
-      #     branches:
-      #       only:
-      #         - master
-      #   - run:
-      #     command: |
-      #       echo "running specific branch tasks"
-      
+          requires:
+          - test
+      - deploy:
+          requires: 
+          - build       
