@@ -27,14 +27,23 @@ jobs:
             echo "running specific branch tasks"
 
  
-  deploy:
+  deploy_prod:
     docker:
       - image: rikorose/gcc-cmake    
     steps:
       - checkout
       - run:
           command: |
-            echo "Deploying firmware"
+            echo "Deploying firmware to production environment"
+
+  deploy_test:
+    docker:
+      - image: rikorose/gcc-cmake    
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo "Deploying firmware to test environment"
 
 workflows:
   version: 2
@@ -44,6 +53,15 @@ workflows:
       - build:
           requires:
           - test
-      - deploy:
+      - deploy_prod:
           requires: 
-          - build       
+            - build   
+          filters: 
+            branches:
+              only: master     
+      - deploy_test:
+          requires: 
+            - build   
+          filters: 
+            branches:
+              ignore: master 
