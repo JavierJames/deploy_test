@@ -27,7 +27,7 @@ jobs:
             echo "running specific branch tasks"
 
  
-  deploy_prod:
+  deploy-prod:
     docker:
       - image: rikorose/gcc-cmake    
     steps:
@@ -36,7 +36,7 @@ jobs:
           command: |
             echo "Deploying firmware to production environment"
 
-  deploy_test:
+  deploy-test:
     docker:
       - image: rikorose/gcc-cmake    
     steps:
@@ -49,17 +49,25 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
+      - build
+      # - test:
+      #     requires:
+      #     - build
       - test
-      - build:
+      - wait-deploy-prod-approval:
+          type: approval
           requires:
-          - test
-      - deploy_prod:
+            - test
+          filters: 
+            branches:
+              only: master   
+      - deploy-prod:
           requires: 
-            - build   
+            - wait-deploy-prod-approval   
           filters: 
             branches:
               only: master     
-      - deploy_test:
+      - deploy-test:
           requires: 
             - build   
           filters: 
