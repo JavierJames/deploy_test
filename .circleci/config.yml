@@ -58,6 +58,9 @@ workflows:
           type: approval
           requires:
             - test
+          filters: 
+            branches:
+              only: master   
       - deploy-prod:
           requires: 
             - wait-deploy-prod-approval   
