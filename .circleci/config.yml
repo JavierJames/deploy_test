@@ -1,75 +1,39 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2
-# Use a package of configuration called an orb.
-
-# orbs:
-#   # Declare a dependency on the welcome-orb
-#   welcome: circleci/welcome-orb@0.4.1
-
 jobs:
-  
   test:
+    working_directory: ~/esp32-firmware/
     docker:
-      - image: rikorose/gcc-cmake    
+      - image: rikorose/gcc-cmake
     steps:
       - checkout
-      - run:
-          command: |
-            echo "running test"
-
+      - run: cd test && cmake .
+      - run: cd test && make all test
   build:
+    working_directory: ~/esp32-firmware/
     docker:
-      - image: rikorose/gcc-cmake    
+        - image: kienaudio/esp-idf-ci-env:v4.1
     steps:
       - checkout
       - run:
           command: |
-            echo "running specific branch tasks"
+            echo "Building"
+            echo "IDF_PATH := $IDF_PATH" > Makefile.local
+            mkdir ~/repo/
+            ls   
+            cd ~/repo/
 
- 
-  deploy-prod:
-    docker:
-      - image: rikorose/gcc-cmake    
-    steps:
-      - checkout
-      - run:
+
+      - run: 
           command: |
-            echo "Deploying firmware to production environment"
-
-  deploy-test:
-    docker:
-      - image: rikorose/gcc-cmake    
-    steps:
-      - checkout
-      - run:
-          command: |
-            echo "Deploying firmware to test environment"
-
+            cd $IDF_PATH
+            . $IDF_PATH/export.sh
+            cd ~/esp32-firmware/
+            make size
+            make CONFIG_IS_SUBWOOFER=1 all
+            make CONFIG_IS_SUBWOOFER=1 size
 workflows:
   version: 2
-  build-and-deploy:
+  build_and_test:
     jobs:
       - build
-      # - test:
-      #     requires:
-      #     - build
       - test
-      - wait-deploy-prod-approval:
-          type: approval
-          requires:
-            - test
-          filters: 
-            branches:
-              only: master   
-      - deploy-prod:
-          requires: 
-            - wait-deploy-prod-approval   
-          filters: 
-            branches:
-              only: master     
-      - deploy-test:
-          requires: 
-            - build   
-          filters: 
-            branches:
-              ignore: master 

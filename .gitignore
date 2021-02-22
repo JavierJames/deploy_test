@@ -1,0 +1,9 @@
+build/
+test/
+sdkconfig.old
+Makefile.local
+.vscode/
+*.swp
+*.swo
+*.vim
+

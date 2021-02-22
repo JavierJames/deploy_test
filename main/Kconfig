@@ -1,0 +1,5 @@
+config IS_SUBWOOFER
+    bool "Build subwoofer"
+    help
+        Select to build a subwoofer project. Unselect to build a satellite.
+
