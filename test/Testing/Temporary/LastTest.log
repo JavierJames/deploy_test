@@ -1,10 +1,10 @@
-Start testing: Jan 21 09:47 CET
+Start testing: Feb 22 17:32 CET
 ----------------------------------------------------------
 1/5 Testing: TestNMEAPkt
 1/5 Test: TestNMEAPkt
 Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/nmea"
 Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
-"TestNMEAPkt" start time: Jan 21 09:47 CET
+"TestNMEAPkt" start time: Feb 22 17:32 CET
 Output:
 ----------------------------------------------------------
 Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
@@ -57,7 +57,7 @@ Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googl
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"TestNMEAPkt" end time: Jan 21 09:47 CET
+"TestNMEAPkt" end time: Feb 22 17:32 CET
 "TestNMEAPkt" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -65,7 +65,7 @@ Test Passed.
 2/5 Test: TestSysInfo
 Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/sysinfo"
 Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
-"TestSysInfo" start time: Jan 21 09:47 CET
+"TestSysInfo" start time: Feb 22 17:32 CET
 Output:
 ----------------------------------------------------------
 Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
@@ -96,10 +96,8 @@ Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googl
 [ RUN      ] TestSysInfo.DoNotReadPicVersion_when_ResourceBusy
 [       OK ] TestSysInfo.DoNotReadPicVersion_when_ResourceBusy (0 ms)
 [ RUN      ] TestSysInfo.SaveSpeakerMode_when_ResourceNotBusy
-[0;36m............ [APP] I/SYSINFO: Setting spk mode: 
-[0m
-[0;36m............ [APP] I/SYSINFO: Getting spk mode: 
-[0m
+[0;36m............ [APP] I/SYSINFO: Setting spk mode: t[0m
+[0;36m............ [APP] I/SYSINFO: Getting spk mode: t[0m
 [       OK ] TestSysInfo.SaveSpeakerMode_when_ResourceNotBusy (0 ms)
 [ RUN      ] TestSysInfo.DoNotSaveSpeakerMode_when_ResourceBusy
 [0;36m............ [APP] I/SYSINFO: Getting spk mode: E[0m
@@ -113,7 +111,7 @@ Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googl
 [ RUN      ] TestSysInfo.DoNotSaveSpkId_when_ResourceBusy
 [0;36m............ [APP] I/SYSINFO: Getting SPK ID: (000000)[0m
 [       OK ] TestSysInfo.DoNotSaveSpkId_when_ResourceBusy (0 ms)
-[----------] 12 tests from TestSysInfo (1 ms total)
+[----------] 12 tests from TestSysInfo (0 ms total)
 
 [----------] Global test environment tear-down
 [==========] 12 tests from 1 test case ran. (1 ms total)
@@ -122,7 +120,7 @@ Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googl
 Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"TestSysInfo" end time: Jan 21 09:47 CET
+"TestSysInfo" end time: Feb 22 17:32 CET
 "TestSysInfo" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -130,7 +128,7 @@ Test Passed.
 3/5 Test: TestBleAdv
 Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/bleadv"
 Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
-"TestBleAdv" start time: Jan 21 09:47 CET
+"TestBleAdv" start time: Feb 22 17:32 CET
 Output:
 ----------------------------------------------------------
 Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
@@ -165,16 +163,16 @@ Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googl
 [       OK ] TestBleAdv.IdentifyAsUnknownBeacon_when_SizeDoesNotMatch (0 ms)
 [ RUN      ] TestBleAdv.HandleError_when_PtrIsNull
 [       OK ] TestBleAdv.HandleError_when_PtrIsNull (0 ms)
-[----------] 12 tests from TestBleAdv (1 ms total)
+[----------] 12 tests from TestBleAdv (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 12 tests from 1 test case ran. (1 ms total)
+[==========] 12 tests from 1 test case ran. (0 ms total)
 [  PASSED  ] 12 tests.
 <end of output>
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"TestBleAdv" end time: Jan 21 09:47 CET
+"TestBleAdv" end time: Feb 22 17:32 CET
 "TestBleAdv" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -182,7 +180,7 @@ Test Passed.
 4/5 Test: TestGroupInfo
 Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/groupinfo"
 Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
-"TestGroupInfo" start time: Jan 21 09:47 CET
+"TestGroupInfo" start time: Feb 22 17:32 CET
 Output:
 ----------------------------------------------------------
 Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
@@ -215,7 +213,7 @@ Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googl
 Test time =   0.00 sec
 ----------------------------------------------------------
 Test Passed.
-"TestGroupInfo" end time: Jan 21 09:47 CET
+"TestGroupInfo" end time: Feb 22 17:32 CET
 "TestGroupInfo" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -223,7 +221,7 @@ Test Passed.
 5/5 Test: TestUTADataset
 Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/utadataset"
 Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
-"TestUTADataset" start time: Jan 21 09:47 CET
+"TestUTADataset" start time: Feb 22 17:32 CET
 Output:
 ----------------------------------------------------------
 Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
@@ -235,18 +233,18 @@ Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googl
 [ RUN      ] TestUTADataset.WriteDatasetToString_when_Serializing
 [       OK ] TestUTADataset.WriteDatasetToString_when_Serializing (0 ms)
 [ RUN      ] TestUTADataset.FailSafe_when_InputNotValid
-[       OK ] TestUTADataset.FailSafe_when_InputNotValid (502 ms)
-[----------] 3 tests from TestUTADataset (502 ms total)
+[       OK ] TestUTADataset.FailSafe_when_InputNotValid (407 ms)
+[----------] 3 tests from TestUTADataset (407 ms total)
 
 [----------] Global test environment tear-down
-[==========] 3 tests from 1 test case ran. (502 ms total)
+[==========] 3 tests from 1 test case ran. (407 ms total)
 [  PASSED  ] 3 tests.
 <end of output>
-Test time =   0.51 sec
+Test time =   0.41 sec
 ----------------------------------------------------------
 Test Passed.
-"TestUTADataset" end time: Jan 21 09:47 CET
+"TestUTADataset" end time: Feb 22 17:32 CET
 "TestUTADataset" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Jan 21 09:47 CET
+End testing: Feb 22 17:32 CET

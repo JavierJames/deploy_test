@@ -1,6 +1,6 @@
-TestNMEAPkt 1 0.00343394
-TestSysInfo 1 0.0067389
-TestBleAdv 1 0.00383592
-TestGroupInfo 1 0.00350094
-TestUTADataset 1 0.505604
+TestNMEAPkt 3 0.000854731
+TestSysInfo 3 0.00210436
+TestBleAdv 3 0.000895341
+TestGroupInfo 3 0.000878731
+TestUTADataset 3 0.136333
 ---
