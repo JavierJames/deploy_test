@@ -8,6 +8,7 @@ jobs:
       - checkout
       - run: cd test && cmake .
       - run: cd test && make all test
+  
   build:
     working_directory: ~/esp32-firmware/
     docker:
@@ -22,7 +23,6 @@ jobs:
             ls   
             cd ~/repo/
 
-
       - run: 
           command: |
             cd $IDF_PATH
@@ -31,9 +31,59 @@ jobs:
             make size
             make CONFIG_IS_SUBWOOFER=1 all
             make CONFIG_IS_SUBWOOFER=1 size
+
+
+  deploy-prod:
+    docker:
+      - image: kienaudio/deploy_tools:v0.2 
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo "Deploying firmware to production environment"  
+            echo $DEPLOY_TOOLS_PATH
+            cd $DEPLOY_TOOLS_PATH/deploy_manager
+            python3 file_encoder.py -h
+
+
+  deploy-test:
+    docker:
+      - image: kienaudio/deploy_tools    
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo "Deploying firmware to test environment"
+
+
 workflows:
   version: 2
-  build_and_test:
+  build_and_test_and_deploy:
     jobs:
       - build
       - test
+
+      - wait-deploy-prod-approval:
+          type: approval
+          requires:
+            - test
+          # filters: 
+          #   branches:
+          #     only: master   
+      
+      #Run deploy-test only when current branch only when the current branch is the master branch
+      #Requires manual approval from CircleCI pipeline home page 
+      - deploy-prod:
+          requires: 
+            - wait-deploy-prod-approval   
+          # filters: 
+          #   branches:
+          #     only: master
+
+      #Run deploy-test only when current branch is not the master branch        
+      - deploy-test:
+          requires: 
+            - test   
+          filters: 
+            branches:
+              ignore: master 
