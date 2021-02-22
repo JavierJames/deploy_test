@@ -182,17 +182,17 @@ HAL.hpp
 array
 -
 
-/home/javier/repo/esp32-firmware/test/TestSysInfo.cpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/TestSysInfo.cpp
 stdio.h
 -
 string.h
 -
 SysInfo.hpp
-/home/javier/repo/esp32-firmware/test/SysInfo.hpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/SysInfo.hpp
 gtest/gtest.h
-/home/javier/repo/esp32-firmware/test/gtest/gtest.h
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/gtest/gtest.h
 HAL_TDD.hpp
-/home/javier/repo/esp32-firmware/test/HAL_TDD.hpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/HAL_TDD.hpp
 
 googletest-src/googlemock/include/gmock/gmock-actions.h
 errno.h

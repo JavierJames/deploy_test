@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o"
-  "CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/system/helper.cpp.o"
+  "CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o"
+  "CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.o"
   "CMakeFiles/groupinfo.dir/TestGroupInfo.cpp.o"
-  "CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.o"
+  "CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.o"
   "groupinfo.pdb"
   "groupinfo"
 )

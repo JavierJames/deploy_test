@@ -48,25 +48,23 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/javier/repo/esp32-firmware/test
+CMAKE_SOURCE_DIR = /home/javier/repo/deploy_env_test/deploy_test_esp/test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/javier/repo/esp32-firmware/test
+CMAKE_BINARY_DIR = /home/javier/repo/deploy_env_test/deploy_test_esp/test
 
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
 
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # Special rule for the target test
 test:
@@ -90,27 +88,6 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
-
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -133,11 +110,23 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/javier/repo/esp32-firmware/test/CMakeFiles /home/javier/repo/esp32-firmware/test/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles /home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/javier/repo/esp32-firmware/test/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -444,212 +433,212 @@ fakes/SysInfo.cpp.s:
 	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/fakes/SysInfo.cpp.s
 .PHONY : fakes/SysInfo.cpp.s
 
-home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.o: home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.o: home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o
 
-.PHONY : home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.o
-
-# target to build an object file
-home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o
-	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o
-	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o
-	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o
-.PHONY : home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.o
-
-home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.i: home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i
-
-.PHONY : home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.i
-
-# target to preprocess a source file
-home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i
-	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i
-	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i
-	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i
-.PHONY : home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.i
-
-home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.s: home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s
-
-.PHONY : home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.s
-
-# target to generate assembly for a file
-home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s
-	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s
-	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s
-	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s
-.PHONY : home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.cpp.s
-
-home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.o: home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.o
-
-.PHONY : home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.o
 
 # target to build an object file
-home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.o:
-	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.o
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.o
-.PHONY : home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o
+	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o
+	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o
+	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.o
 
-home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.i: home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.i: home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i
 
-.PHONY : home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.i
 
 # target to preprocess a source file
-home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.i:
-	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.i
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.i
-.PHONY : home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i
+	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i
+	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i
+	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.i
 
-home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.s: home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.s: home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s
 
-.PHONY : home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.s
 
 # target to generate assembly for a file
-home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.s:
-	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.s
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.s
-.PHONY : home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s
+	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s
+	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s
+	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.cpp.s
 
-home/javier/repo/esp32-firmware/main/comms/GroupInfo.o: home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.o: home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.o
 
-.PHONY : home/javier/repo/esp32-firmware/main/comms/GroupInfo.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.o
 
 # target to build an object file
-home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.o:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.o
-.PHONY : home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.o:
+	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.o
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.o
 
-home/javier/repo/esp32-firmware/main/comms/GroupInfo.i: home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.i: home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.i
 
-.PHONY : home/javier/repo/esp32-firmware/main/comms/GroupInfo.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.i
 
 # target to preprocess a source file
-home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.i:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.i
-.PHONY : home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.i:
+	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.i
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.i
 
-home/javier/repo/esp32-firmware/main/comms/GroupInfo.s: home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.s: home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.s
 
-.PHONY : home/javier/repo/esp32-firmware/main/comms/GroupInfo.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.s
 
 # target to generate assembly for a file
-home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.s:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.s
-.PHONY : home/javier/repo/esp32-firmware/main/comms/GroupInfo.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.s:
+	$(MAKE) -f CMakeFiles/bleadv.dir/build.make CMakeFiles/bleadv.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.s
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.cpp.s
 
-home/javier/repo/esp32-firmware/main/comms/NMEAPkt.o: home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.o: home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.o
 
-.PHONY : home/javier/repo/esp32-firmware/main/comms/NMEAPkt.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.o
 
 # target to build an object file
-home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.o:
-	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.o
-.PHONY : home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.o:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.o
 
-home/javier/repo/esp32-firmware/main/comms/NMEAPkt.i: home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.i: home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.i
 
-.PHONY : home/javier/repo/esp32-firmware/main/comms/NMEAPkt.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.i
 
 # target to preprocess a source file
-home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.i:
-	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.i
-.PHONY : home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.i:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.i
 
-home/javier/repo/esp32-firmware/main/comms/NMEAPkt.s: home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.s: home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.s
 
-.PHONY : home/javier/repo/esp32-firmware/main/comms/NMEAPkt.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.s
 
 # target to generate assembly for a file
-home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.s:
-	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.s
-.PHONY : home/javier/repo/esp32-firmware/main/comms/NMEAPkt.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.s:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.cpp.s
 
-home/javier/repo/esp32-firmware/main/system/SysInfo.o: home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.o: home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.o
 
-.PHONY : home/javier/repo/esp32-firmware/main/system/SysInfo.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.o
 
 # target to build an object file
-home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.o:
-	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.o
-.PHONY : home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.o:
+	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.o
 
-home/javier/repo/esp32-firmware/main/system/SysInfo.i: home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.i: home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.i
 
-.PHONY : home/javier/repo/esp32-firmware/main/system/SysInfo.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.i
 
 # target to preprocess a source file
-home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.i:
-	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.i
-.PHONY : home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.i:
+	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.i
 
-home/javier/repo/esp32-firmware/main/system/SysInfo.s: home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.s: home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.s
 
-.PHONY : home/javier/repo/esp32-firmware/main/system/SysInfo.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.s
 
 # target to generate assembly for a file
-home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.s:
-	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.s
-.PHONY : home/javier/repo/esp32-firmware/main/system/SysInfo.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.s:
+	$(MAKE) -f CMakeFiles/nmea.dir/build.make CMakeFiles/nmea.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.cpp.s
 
-home/javier/repo/esp32-firmware/main/system/helper.o: home/javier/repo/esp32-firmware/main/system/helper.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.o: home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.o
 
-.PHONY : home/javier/repo/esp32-firmware/main/system/helper.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.o
 
 # target to build an object file
-home/javier/repo/esp32-firmware/main/system/helper.cpp.o:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/system/helper.cpp.o
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/system/helper.cpp.o
-.PHONY : home/javier/repo/esp32-firmware/main/system/helper.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.o:
+	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.o
 
-home/javier/repo/esp32-firmware/main/system/helper.i: home/javier/repo/esp32-firmware/main/system/helper.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.i: home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.i
 
-.PHONY : home/javier/repo/esp32-firmware/main/system/helper.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.i
 
 # target to preprocess a source file
-home/javier/repo/esp32-firmware/main/system/helper.cpp.i:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/system/helper.cpp.i
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/system/helper.cpp.i
-.PHONY : home/javier/repo/esp32-firmware/main/system/helper.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.i:
+	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.i
 
-home/javier/repo/esp32-firmware/main/system/helper.s: home/javier/repo/esp32-firmware/main/system/helper.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.s: home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.s
 
-.PHONY : home/javier/repo/esp32-firmware/main/system/helper.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.s
 
 # target to generate assembly for a file
-home/javier/repo/esp32-firmware/main/system/helper.cpp.s:
-	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/esp32-firmware/main/system/helper.cpp.s
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/system/helper.cpp.s
-.PHONY : home/javier/repo/esp32-firmware/main/system/helper.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.s:
+	$(MAKE) -f CMakeFiles/sysinfo.dir/build.make CMakeFiles/sysinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.cpp.s
 
-home/javier/repo/esp32-firmware/main/uta/dataset.o: home/javier/repo/esp32-firmware/main/uta/dataset.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.o: home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.o
 
-.PHONY : home/javier/repo/esp32-firmware/main/uta/dataset.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.o
 
 # target to build an object file
-home/javier/repo/esp32-firmware/main/uta/dataset.cpp.o:
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/uta/dataset.cpp.o
-.PHONY : home/javier/repo/esp32-firmware/main/uta/dataset.cpp.o
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.o:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.o
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.o
 
-home/javier/repo/esp32-firmware/main/uta/dataset.i: home/javier/repo/esp32-firmware/main/uta/dataset.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.i: home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.i
 
-.PHONY : home/javier/repo/esp32-firmware/main/uta/dataset.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.i
 
 # target to preprocess a source file
-home/javier/repo/esp32-firmware/main/uta/dataset.cpp.i:
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/uta/dataset.cpp.i
-.PHONY : home/javier/repo/esp32-firmware/main/uta/dataset.cpp.i
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.i:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.i
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.i
 
-home/javier/repo/esp32-firmware/main/uta/dataset.s: home/javier/repo/esp32-firmware/main/uta/dataset.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.s: home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.s
 
-.PHONY : home/javier/repo/esp32-firmware/main/uta/dataset.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.s
 
 # target to generate assembly for a file
-home/javier/repo/esp32-firmware/main/uta/dataset.cpp.s:
-	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/esp32-firmware/main/uta/dataset.cpp.s
-.PHONY : home/javier/repo/esp32-firmware/main/uta/dataset.cpp.s
+home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.s:
+	$(MAKE) -f CMakeFiles/groupinfo.dir/build.make CMakeFiles/groupinfo.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.s
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.cpp.s
+
+home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.o: home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.o
+
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.o
+
+# target to build an object file
+home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.o:
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.o
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.o
+
+home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.i: home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.i
+
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.i
+
+# target to preprocess a source file
+home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.i:
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.i
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.i
+
+home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.s: home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.s
+
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.s
+
+# target to generate assembly for a file
+home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.s:
+	$(MAKE) -f CMakeFiles/utadataset.dir/build.make CMakeFiles/utadataset.dir/home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.s
+.PHONY : home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.cpp.s
 
 # Help Target
 help:
@@ -657,18 +646,17 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... groupinfo"
 	@echo "... bleadv"
 	@echo "... test"
 	@echo "... nmea"
 	@echo "... edit_cache"
 	@echo "... utadataset"
-	@echo "... list_install_components"
-	@echo "... install/strip"
 	@echo "... install/local"
 	@echo "... sysinfo"
 	@echo "... rebuild_cache"
+	@echo "... install"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
@@ -691,27 +679,27 @@ help:
 	@echo "... fakes/SysInfo.o"
 	@echo "... fakes/SysInfo.i"
 	@echo "... fakes/SysInfo.s"
-	@echo "... home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.o"
-	@echo "... home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.i"
-	@echo "... home/javier/repo/esp32-firmware/components/hal/hal-tdd/HAL_TDD.s"
-	@echo "... home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.o"
-	@echo "... home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.i"
-	@echo "... home/javier/repo/esp32-firmware/main/blue/ble/ble_adv_conf.s"
-	@echo "... home/javier/repo/esp32-firmware/main/comms/GroupInfo.o"
-	@echo "... home/javier/repo/esp32-firmware/main/comms/GroupInfo.i"
-	@echo "... home/javier/repo/esp32-firmware/main/comms/GroupInfo.s"
-	@echo "... home/javier/repo/esp32-firmware/main/comms/NMEAPkt.o"
-	@echo "... home/javier/repo/esp32-firmware/main/comms/NMEAPkt.i"
-	@echo "... home/javier/repo/esp32-firmware/main/comms/NMEAPkt.s"
-	@echo "... home/javier/repo/esp32-firmware/main/system/SysInfo.o"
-	@echo "... home/javier/repo/esp32-firmware/main/system/SysInfo.i"
-	@echo "... home/javier/repo/esp32-firmware/main/system/SysInfo.s"
-	@echo "... home/javier/repo/esp32-firmware/main/system/helper.o"
-	@echo "... home/javier/repo/esp32-firmware/main/system/helper.i"
-	@echo "... home/javier/repo/esp32-firmware/main/system/helper.s"
-	@echo "... home/javier/repo/esp32-firmware/main/uta/dataset.o"
-	@echo "... home/javier/repo/esp32-firmware/main/uta/dataset.i"
-	@echo "... home/javier/repo/esp32-firmware/main/uta/dataset.s"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.o"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.i"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/components/hal/hal-tdd/HAL_TDD.s"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.o"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.i"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/blue/ble/ble_adv_conf.s"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.o"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.i"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/GroupInfo.s"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.o"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.i"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/comms/NMEAPkt.s"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.o"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.i"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/system/SysInfo.s"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.o"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.i"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/system/helper.s"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.o"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.i"
+	@echo "... home/javier/repo/deploy_env_test/deploy_test_esp/main/uta/dataset.s"
 .PHONY : help
 
 

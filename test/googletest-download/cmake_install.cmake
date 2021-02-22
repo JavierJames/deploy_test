@@ -1,4 +1,4 @@
-# Install script for directory: /home/javier/repo/esp32-firmware/test/googletest-download
+# Install script for directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-download
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/javier/repo/esp32-firmware/test/googletest-download/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-download/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

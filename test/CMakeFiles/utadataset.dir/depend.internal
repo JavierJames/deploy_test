@@ -40,7 +40,7 @@ CMakeFiles/utadataset.dir/TestUTADataset.cpp.o
  ../main/system/BatteryMan.hpp
  ../main/system/SysInfo.hpp
  ../main/uta/dataset.hpp
- /home/javier/repo/esp32-firmware/test/TestUTADataset.cpp
+ /home/javier/repo/deploy_env_test/deploy_test_esp/test/TestUTADataset.cpp
  googletest-src/googlemock/include/gmock/gmock-actions.h
  googletest-src/googlemock/include/gmock/gmock-cardinalities.h
  googletest-src/googlemock/include/gmock/gmock-generated-actions.h
@@ -100,7 +100,7 @@ CMakeFiles/utadataset.dir/fakes/SysInfo.cpp.o
  ../components/hal/hal-tdd/Task.hpp
  ../components/hal/hal-tdd/pins.h
  ../main/system/SysInfo.hpp
- /home/javier/repo/esp32-firmware/test/fakes/SysInfo.cpp
+ /home/javier/repo/deploy_env_test/deploy_test_esp/test/fakes/SysInfo.cpp
  googletest-src/googlemock/include/gmock/gmock-actions.h
  googletest-src/googlemock/include/gmock/gmock-cardinalities.h
  googletest-src/googlemock/include/gmock/gmock-generated-actions.h

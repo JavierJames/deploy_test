@@ -358,23 +358,23 @@ blue/ble/ble_adv_conf.hpp
 HAL.hpp
 /home/javier/repo/esp32-firmware/main/uta/HAL.hpp
 
-/home/javier/repo/esp32-firmware/test/TestUTADataset.cpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/TestUTADataset.cpp
 stdio.h
 -
 string.h
 -
 globals.hpp
-/home/javier/repo/esp32-firmware/test/globals.hpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/globals.hpp
 uta/dataset.hpp
-/home/javier/repo/esp32-firmware/test/uta/dataset.hpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/uta/dataset.hpp
 gmock/gmock.h
-/home/javier/repo/esp32-firmware/test/gmock/gmock.h
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/gmock/gmock.h
 gtest/gtest.h
-/home/javier/repo/esp32-firmware/test/gtest/gtest.h
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/gtest/gtest.h
 
-/home/javier/repo/esp32-firmware/test/fakes/SysInfo.cpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/fakes/SysInfo.cpp
 SysInfo.hpp
-/home/javier/repo/esp32-firmware/test/fakes/SysInfo.hpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/fakes/SysInfo.hpp
 cstring
 -
 

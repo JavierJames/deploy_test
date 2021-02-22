@@ -2,12 +2,12 @@ Start testing: Jan 21 09:47 CET
 ----------------------------------------------------------
 1/5 Testing: TestNMEAPkt
 1/5 Test: TestNMEAPkt
-Command: "/home/javier/repo/esp32-firmware/test/nmea"
-Directory: /home/javier/repo/esp32-firmware/test
+Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/nmea"
+Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
 "TestNMEAPkt" start time: Jan 21 09:47 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/javier/repo/esp32-firmware/test/googletest-src/googletest/src/gtest_main.cc
+Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
 [==========] Running 9 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 9 tests from TestNMEAPkt
@@ -63,12 +63,12 @@ Test Passed.
 
 2/5 Testing: TestSysInfo
 2/5 Test: TestSysInfo
-Command: "/home/javier/repo/esp32-firmware/test/sysinfo"
-Directory: /home/javier/repo/esp32-firmware/test
+Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/sysinfo"
+Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
 "TestSysInfo" start time: Jan 21 09:47 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/javier/repo/esp32-firmware/test/googletest-src/googletest/src/gtest_main.cc
+Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
 [==========] Running 12 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 12 tests from TestSysInfo
@@ -128,12 +128,12 @@ Test Passed.
 
 3/5 Testing: TestBleAdv
 3/5 Test: TestBleAdv
-Command: "/home/javier/repo/esp32-firmware/test/bleadv"
-Directory: /home/javier/repo/esp32-firmware/test
+Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/bleadv"
+Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
 "TestBleAdv" start time: Jan 21 09:47 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/javier/repo/esp32-firmware/test/googletest-src/googletest/src/gtest_main.cc
+Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
 [==========] Running 12 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 12 tests from TestBleAdv
@@ -180,12 +180,12 @@ Test Passed.
 
 4/5 Testing: TestGroupInfo
 4/5 Test: TestGroupInfo
-Command: "/home/javier/repo/esp32-firmware/test/groupinfo"
-Directory: /home/javier/repo/esp32-firmware/test
+Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/groupinfo"
+Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
 "TestGroupInfo" start time: Jan 21 09:47 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/javier/repo/esp32-firmware/test/googletest-src/googletest/src/gtest_main.cc
+Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
 [==========] Running 7 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 7 tests from TestGroupInfo
@@ -221,12 +221,12 @@ Test Passed.
 
 5/5 Testing: TestUTADataset
 5/5 Test: TestUTADataset
-Command: "/home/javier/repo/esp32-firmware/test/utadataset"
-Directory: /home/javier/repo/esp32-firmware/test
+Command: "/home/javier/repo/deploy_env_test/deploy_test_esp/test/utadataset"
+Directory: /home/javier/repo/deploy_env_test/deploy_test_esp/test
 "TestUTADataset" start time: Jan 21 09:47 CET
 Output:
 ----------------------------------------------------------
-Running main() from /home/javier/repo/esp32-firmware/test/googletest-src/googletest/src/gtest_main.cc
+Running main() from /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/src/gtest_main.cc
 [==========] Running 3 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 3 tests from TestUTADataset

@@ -6,5 +6,5 @@ CXX_FLAGS =   -Wall -Wshadow -Werror -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /home/javier/repo/esp32-firmware/test/googletest-src/googlemock/include -isystem /home/javier/repo/esp32-firmware/test/googletest-src/googlemock -isystem /home/javier/repo/esp32-firmware/test/googletest-src/googletest/include -isystem /home/javier/repo/esp32-firmware/test/googletest-src/googletest 
+CXX_INCLUDES = -isystem /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googlemock/include -isystem /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googlemock -isystem /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest/include -isystem /home/javier/repo/deploy_env_test/deploy_test_esp/test/googletest-src/googletest 
 

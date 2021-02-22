@@ -186,17 +186,17 @@ array
 cstdint
 -
 
-/home/javier/repo/esp32-firmware/test/TestBleAdv.cpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/TestBleAdv.cpp
 stdio.h
 -
 string.h
 -
 ble_adv_conf.hpp
-/home/javier/repo/esp32-firmware/test/ble_adv_conf.hpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/ble_adv_conf.hpp
 gtest/gtest.h
-/home/javier/repo/esp32-firmware/test/gtest/gtest.h
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/gtest/gtest.h
 HAL_TDD.hpp
-/home/javier/repo/esp32-firmware/test/HAL_TDD.hpp
+/home/javier/repo/deploy_env_test/deploy_test_esp/test/HAL_TDD.hpp
 
 googletest-src/googlemock/include/gmock/gmock-actions.h
 errno.h

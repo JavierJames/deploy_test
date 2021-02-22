@@ -1,11 +1,11 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/javier/repo/esp32-firmware/test/CMakeFiles/CMakeTmp
+Change Dir: /home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles/CMakeTmp
 
 Run Build Command:"/usr/bin/make" "cmTC_f91ce/fast"
 /usr/bin/make -f CMakeFiles/cmTC_f91ce.dir/build.make CMakeFiles/cmTC_f91ce.dir/build
-make[1]: Entering directory '/home/javier/repo/esp32-firmware/test/CMakeFiles/CMakeTmp'
+make[1]: Entering directory '/home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles/CMakeTmp'
 Building C object CMakeFiles/cmTC_f91ce.dir/CheckSymbolExists.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_f91ce.dir/CheckSymbolExists.c.o   -c /home/javier/repo/esp32-firmware/test/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/usr/bin/cc     -o CMakeFiles/cmTC_f91ce.dir/CheckSymbolExists.c.o   -c /home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles/CMakeTmp/CheckSymbolExists.c
 Linking C executable cmTC_f91ce
 /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f91ce.dir/link.txt --verbose=1
 /usr/bin/cc       CMakeFiles/cmTC_f91ce.dir/CheckSymbolExists.c.o  -o cmTC_f91ce -rdynamic 
@@ -14,11 +14,11 @@ CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
 CMakeFiles/cmTC_f91ce.dir/build.make:97: recipe for target 'cmTC_f91ce' failed
 make[1]: *** [cmTC_f91ce] Error 1
-make[1]: Leaving directory '/home/javier/repo/esp32-firmware/test/CMakeFiles/CMakeTmp'
+make[1]: Leaving directory '/home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles/CMakeTmp'
 Makefile:126: recipe for target 'cmTC_f91ce/fast' failed
 make: *** [cmTC_f91ce/fast] Error 2
 
-File /home/javier/repo/esp32-firmware/test/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/javier/repo/deploy_env_test/deploy_test_esp/test/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
