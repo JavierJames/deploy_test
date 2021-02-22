@@ -1,7 +1,6 @@
 version: 2
 jobs:
-  # test:
-  build:
+  test:
     working_directory: ~/esp32-firmware/
     docker:
       - image: rikorose/gcc-cmake
@@ -10,28 +9,28 @@ jobs:
       - run: cd test && cmake .
       - run: cd test && make all test
   
-  # build:
-  #   working_directory: ~/esp32-firmware/
-  #   docker:
-  #       - image: kienaudio/esp-idf-ci-env:v4.1
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         command: |
-  #           echo "Building"
-  #           echo "IDF_PATH := $IDF_PATH" > Makefile.local
-  #           mkdir ~/repo/
-  #           ls   
-  #           cd ~/repo/
+  build:
+    working_directory: ~/esp32-firmware/
+    docker:
+        - image: kienaudio/esp-idf-ci-env:v4.1
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo "Building"
+            echo "IDF_PATH := $IDF_PATH" > Makefile.local
+            mkdir ~/repo/
+            ls   
+            cd ~/repo/
 
-  #     - run: 
-  #         command: |
-  #           cd $IDF_PATH
-  #           . $IDF_PATH/export.sh
-  #           cd ~/esp32-firmware/
-  #           make size
-  #           make CONFIG_IS_SUBWOOFER=1 all
-  #           make CONFIG_IS_SUBWOOFER=1 size
+      - run: 
+          command: |
+            cd $IDF_PATH
+            . $IDF_PATH/export.sh
+            cd ~/esp32-firmware/
+            make size
+            make CONFIG_IS_SUBWOOFER=1 all
+            make CONFIG_IS_SUBWOOFER=1 size
 
 
   deploy-prod:
@@ -62,7 +61,7 @@ workflows:
   build_and_test_and_deploy:
     jobs:
       - build
-      # - test
+      - test
 
       # - wait-deploy-prod-approval:
       #     type: approval
