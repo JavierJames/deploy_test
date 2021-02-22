@@ -43,7 +43,7 @@ jobs:
             echo "Deploying firmware to production environment"  
             echo $DEPLOY_TOOLS_PATH
             cd $DEPLOY_TOOLS_PATH/deploy_manager
-            python3 file_encoder.py -h
+            python3 deploy.py -h
 
 
   deploy-test:
@@ -54,6 +54,9 @@ jobs:
       - run:
           command: |
             echo "Deploying firmware to test environment"
+            echo $DEPLOY_TOOLS_PATH
+            cd $DEPLOY_TOOLS_PATH/deploy_manager
+            python3 file_encoder.py -h
 
 
 workflows:
@@ -63,27 +66,27 @@ workflows:
       - build
       - test
 
-      # - wait-deploy-prod-approval:
-      #     type: approval
-      #     requires:
-      #       - test
-      #     # filters: 
-      #     #   branches:
-      #     #     only: master   
+      - wait-deploy-prod-approval:
+          type: approval
+          requires:
+            - test
+          # filters: 
+          #   branches:
+          #     only: master   
       
-      # #Run deploy-test only when current branch only when the current branch is the master branch
-      # #Requires manual approval from CircleCI pipeline home page 
-      # - deploy-prod:
-      #     requires: 
-      #       - wait-deploy-prod-approval   
-      #     # filters: 
-      #     #   branches:
-      #     #     only: master
+      #Run deploy-test only when current branch only when the current branch is the master branch
+      #Requires manual approval from CircleCI pipeline home page 
+      - deploy-prod:
+          requires: 
+            - wait-deploy-prod-approval   
+          # filters: 
+          #   branches:
+          #     only: master
 
-      # #Run deploy-test only when current branch is not the master branch        
-      # - deploy-test:
-      #     requires: 
-      #       - test   
-      #     filters: 
-      #       branches:
-      #         ignore: master 
+      #Run deploy-test only when current branch is not the master branch        
+      - deploy-test:
+          requires: 
+            - test   
+          filters: 
+            branches:
+              ignore: master 
