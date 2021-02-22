@@ -48,7 +48,7 @@ jobs:
 
   deploy-test:
     docker:
-      - image: kienaudio/deploy_tools    
+      - image: kienaudio/deploy_tools:v0.2    
     steps:
       - checkout
       - run:
