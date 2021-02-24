@@ -85,6 +85,9 @@ workflows:
           requires:
             - build 
             - test
+          filters:
+            branches:
+              only:  /release\/.*/
 
       - finalize-release: 
           requires:
