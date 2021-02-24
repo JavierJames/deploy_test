@@ -80,17 +80,18 @@ workflows:
       - build
       - test
 
-     - wait-release-approval:
+      - wait-release-approval:
           type: approval
           requires:
             - build 
             - test
+
       - finalize-release: 
-        requires:
-          - wait-release-approval 
-        filters:
-          - branches:
-            only:  /release\/.*/
+          requires:
+            - wait-release-approval 
+          filters:
+            branches:
+              only:  /release\/.*/
 
 
       - wait-deploy-prod-approval:
