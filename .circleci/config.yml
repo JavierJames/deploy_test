@@ -33,6 +33,20 @@ jobs:
             make CONFIG_IS_SUBWOOFER=1 size
 
 
+  finalize-release: 
+    working_directory: ~/esp32-firmware/
+    docker:
+      - image: kienaudio/deploy_tools:v0.5 
+    steps:
+      - checkout
+      - run:
+          command: |
+            echo "Finalizing firmware release"  
+            cd ~/esp32-firmware/
+            git rev-parse --abbrev-ref HEAD
+            # python3  $DEPLOY_TOOLS_PATH/kdm.py -p prod -t finish -rv v0.0.2
+
+
   deploy-prod:
     docker:
       - image: kienaudio/deploy_tools:v0.5 
@@ -65,6 +79,19 @@ workflows:
     jobs:
       - build
       - test
+
+     - wait-release-approval:
+          type: approval
+          requires:
+            - build 
+            - test
+      - finalize-release: 
+        requires:
+          - wait-release-approval 
+        filters:
+          - branches:
+            only:  /release\/.*/
+
 
       - wait-deploy-prod-approval:
           type: approval
