@@ -44,7 +44,7 @@ jobs:
             echo "Finalizing firmware release"  
             cd ~/esp32-firmware/
             git rev-parse --abbrev-ref HEAD
-            # python3  $DEPLOY_TOOLS_PATH/kdm.py -p prod -t finish -rv v0.0.2
+            python3  $DEPLOY_TOOLS_PATH/kdm.py -p prod -t finish -b $(git rev-parse --abbrev-ref HEAD)
 
 
   deploy-prod:
