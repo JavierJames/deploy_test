@@ -39,6 +39,10 @@ jobs:
       - image: kienaudio/deploy_tools:v0.6 
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "a6:ee:80:03:82:20:e6:ed:3f:fa:96:82:07:d2:79:66"
+
       - run:
           command: |
             echo "Finalizing firmware release"  
