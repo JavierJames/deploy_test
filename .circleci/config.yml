@@ -124,7 +124,9 @@ jobs:
             echo "Nope!"; exit 1
           fi
 
-
+      - store_artifacts:
+          path: /tmp/workspace/firmware/esp32-firmware.bin
+          destination: aritifact-firmware
 
 workflows:
   version: 2
