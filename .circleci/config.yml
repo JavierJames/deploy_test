@@ -1,7 +1,23 @@
 version: 2
+
+# Yaml References enable us to DRY out our config by sharing variables across multiple jobs.
+# In this case, we are commonly using the "workspaces" feature to share
+# build artifacts and files across jobs. 
+references:
+  workspace_root: &workspace_root
+    /tmp/workspace
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+  working_dir_root: &working_dir_root
+    ~/esp32-firmware/
+  deploy_tool_docker_img: &deploy_tool_docker_img
+    kienaudio/deploy_tools:v0.6
+
+
 jobs:
   test:
-    working_directory: ~/esp32-firmware/
+    working_directory: *working_dir_root
     docker:
       - image: rikorose/gcc-cmake
     steps:
@@ -10,7 +26,7 @@ jobs:
       - run: cd test && make all test
   
   build:
-    working_directory: ~/esp32-firmware/
+    working_directory: *working_dir_root
     docker:
         - image: kienaudio/esp-idf-ci-env:v4.1
     steps:
@@ -34,9 +50,9 @@ jobs:
 
 
   finalize-release: 
-    working_directory: ~/esp32-firmware/
+    working_directory: *working_dir_root
     docker:
-      - image: kienaudio/deploy_tools:v0.6 
+      - image: *deploy_tool_docker_img
     steps:
       - checkout
       - add_ssh_keys:
@@ -53,7 +69,7 @@ jobs:
 
   deploy-prod:
     docker:
-      - image: kienaudio/deploy_tools:v0.6 
+      - image: *deploy_tool_docker_img
     steps:
       - checkout
       - run:
@@ -66,7 +82,7 @@ jobs:
 
   deploy-test:
     docker:
-      - image: kienaudio/deploy_tools:v0.6    
+      - image: *deploy_tool_docker_img    
     steps:
       - checkout
       - run:
