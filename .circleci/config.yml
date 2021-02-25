@@ -48,17 +48,6 @@ jobs:
             make CONFIG_IS_SUBWOOFER=1 all
             make CONFIG_IS_SUBWOOFER=1 size
 
-
-
-      # - run: 
-      #     command: |
-      #       mkdir -p /tmp/workspace/firmware
-      #       echo "Hello, world!" > /tmp/workspace/firmware/echo-output
-
-      #       cd ~/esp32-firmware/
-      #       ls
-      #       cd build
-      #       cp esp32-firmware.bin /tmp/workspace/firmware
       - run: 
           command: |
             mkdir -p /tmp/workspace/firmware
@@ -70,7 +59,6 @@ jobs:
       - persist_to_workspace:
           root: *workspace_root
           paths:
-            # - firmware/echo-output
             - firmware/esp32-firmware.bin
 
 
@@ -113,6 +101,10 @@ jobs:
             echo "Preparing firmware for deployment"
             python3 $DEPLOY_TOOLS_PATH/deploy_manager/kdm.py -p prod -t validate -m esp -f /tmp/workspace/firmware/*
 
+      #Remove first firmware
+      - run:
+          command: |
+            rm /tmp/workspace/firmware/esp32-firmware.bin
 
       - persist_to_workspace:
           root: *workspace_root
@@ -154,17 +146,6 @@ jobs:
           command: |
             cd /tmp/workspace/firmware/
             ls 
-
-      # - run: |
-      #     if [[ `cat /tmp/workspace/firmware/echo-output` == "Hello, world!" ]]; then
-      #       echo "It worked!";
-      #     else
-      #       echo "Nope!"; exit 1
-      #     fi
-
-      # - store_artifacts:
-      #     path: /tmp/workspace/firmware/esp32-firmware.bin
-      #     destination: aritifact-firmware
 
       - store_artifacts:
           path: /tmp/workspace/firmware/
