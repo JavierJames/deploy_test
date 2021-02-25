@@ -12,7 +12,7 @@ references:
   working_dir_root: &working_dir_root
     ~/esp32-firmware/
   deploy_tool_docker_img: &deploy_tool_docker_img
-    kienaudio/deploy_tools:v0.6
+    kienaudio/deploy_tools:v0.7
 
 
 jobs:
@@ -50,20 +50,27 @@ jobs:
 
 
 
+      # - run: 
+      #     command: |
+      #       mkdir -p /tmp/workspace/firmware
+      #       echo "Hello, world!" > /tmp/workspace/firmware/echo-output
+
+      #       cd ~/esp32-firmware/
+      #       ls
+      #       cd build
+      #       cp esp32-firmware.bin /tmp/workspace/firmware
       - run: 
           command: |
             mkdir -p /tmp/workspace/firmware
-            echo "Hello, world!" > /tmp/workspace/firmware/echo-output
-
             cd ~/esp32-firmware/
-            ls
             cd build
             cp esp32-firmware.bin /tmp/workspace/firmware
+
 
       - persist_to_workspace:
           root: *workspace_root
           paths:
-            - firmware/echo-output
+            # - firmware/echo-output
             - firmware/esp32-firmware.bin
 
 
@@ -82,7 +89,38 @@ jobs:
             echo "Finalizing firmware release"  
             cd ~/esp32-firmware/
             git rev-parse --abbrev-ref HEAD
-            python3  $DEPLOY_TOOLS_PATH/deploy_manager/kdm.py -p prod -t finish -b $(git rev-parse --abbrev-ref HEAD)
+            python3  $DEPLOY_TOOLS_PATH/deploy_manager/kdm.py -p prod -t finish -m esp -b $(git rev-parse --abbrev-ref HEAD)
+
+
+  prepare-and-validate-firmware-for-deploy:
+    working_directory: *working_dir_root
+    docker:
+      - image: *deploy_tool_docker_img
+    steps:
+      - *attach_workspace
+      - checkout
+
+      #Prepare the firmware for deployment
+      - run:
+          command: |
+            echo "Preparing firmware for deployment"
+            python3 $DEPLOY_TOOLS_PATH/deploy_manager/kdm.py -p prod -t encode -m esp -s sub -d /tmp/workspace/firmware/ 
+ 
+      #Validate the firmware for deployment. 
+      #Since firmware name is currently unknown, pass as file the special character *. This will only work with one file in folder
+      - run:
+          command: |
+            echo "Preparing firmware for deployment"
+            python3 $DEPLOY_TOOLS_PATH/deploy_manager/kdm.py -p prod -t validate -m esp -f /tmp/workspace/firmware/*
+
+
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - firmware/*
+
+      # - store_artifacts:
+      #     path: /tmp/workspace/firmware/
 
 
   deploy-prod:
@@ -117,16 +155,16 @@ jobs:
             cd /tmp/workspace/firmware/
             ls 
 
-      - run: |
-          if [[ `cat /tmp/workspace/firmware/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
+      # - run: |
+      #     if [[ `cat /tmp/workspace/firmware/echo-output` == "Hello, world!" ]]; then
+      #       echo "It worked!";
+      #     else
+      #       echo "Nope!"; exit 1
+      #     fi
 
-      - store_artifacts:
-          path: /tmp/workspace/firmware/esp32-firmware.bin
-          destination: aritifact-firmware
+      # - store_artifacts:
+      #     path: /tmp/workspace/firmware/esp32-firmware.bin
+      #     destination: aritifact-firmware
 
       - store_artifacts:
           path: /tmp/workspace/firmware/
@@ -138,6 +176,7 @@ workflows:
       - build
       - test
 
+      #Ensure manual approval before closing release
       - wait-release-approval:
           type: approval
           requires:
@@ -154,11 +193,20 @@ workflows:
             branches:
               only:  /release\/.*/
 
+      - prepare-and-validate-firmware-for-deploy:
+          requires:
+            - test
+            - build
+          filters:
+            branches:
+              only:  
+              -  master
+              -  /feature\/.*/ 
 
       - wait-deploy-prod-approval:
           type: approval
           requires:
-            - test
+            - prepare-and-validate-firmware-for-deploy
           filters: 
             branches:
               only: master   
@@ -175,8 +223,7 @@ workflows:
       #Run deploy-test only when current branch is not the master branch        
       - deploy-test:
           requires: 
-            - build 
-            - test
+            - prepare-and-validate-firmware-for-deploy
           filters: 
             branches:
               ignore: master  
