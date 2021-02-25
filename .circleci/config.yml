@@ -100,11 +100,12 @@ jobs:
           command: |
             echo "Preparing firmware for deployment"
             python3 $DEPLOY_TOOLS_PATH/deploy_manager/kdm.py -p prod -t validate -m esp -f /tmp/workspace/firmware/*
+            ls /tmp/workspace/firmware/ 
 
-      #Remove first firmware
-      - run:
-          command: |
-            rm /tmp/workspace/firmware/esp32-firmware.bin
+      # #Remove first firmware
+      # - run:
+      #     command: |
+      #       rm /tmp/workspace/firmware/esp32-firmware.bin
 
       - persist_to_workspace:
           root: *workspace_root
@@ -144,8 +145,7 @@ jobs:
 
       - run:
           command: |
-            cd /tmp/workspace/firmware/
-            ls 
+            ls /tmp/workspace/firmware/
 
       - store_artifacts:
           path: /tmp/workspace/firmware/
