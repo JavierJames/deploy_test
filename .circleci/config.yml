@@ -48,6 +48,16 @@ jobs:
             make CONFIG_IS_SUBWOOFER=1 all
             make CONFIG_IS_SUBWOOFER=1 size
 
+      - run: 
+          command: |
+            mkdir -p /tmp/workspace/firmware
+            echo "Hello, world!" > /tmp/workspace/firmware/echo-output
+            
+
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - firmware/echo-output
 
   finalize-release: 
     working_directory: *working_dir_root
@@ -81,9 +91,11 @@ jobs:
 
 
   deploy-test:
+    working_directory: *working_dir_root
     docker:
       - image: *deploy_tool_docker_img    
     steps:
+      - *attach_workspace
       - checkout
       - run:
           command: |
@@ -91,6 +103,15 @@ jobs:
             echo $DEPLOY_TOOLS_PATH
             cd $DEPLOY_TOOLS_PATH/deploy_manager
             python3 file_encoder.py -h
+
+
+      - run: |
+          if [[ `cat /tmp/workspace/firmware/echo-output` == "Hello, world!" ]]; then
+            echo "It worked!";
+          else
+            echo "Nope!"; exit 1
+          fi
+
 
 
 workflows:
@@ -137,7 +158,8 @@ workflows:
       #Run deploy-test only when current branch is not the master branch        
       - deploy-test:
           requires: 
-            - test   
+            - build 
+            - test
           filters: 
             branches:
               ignore: master  
