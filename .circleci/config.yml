@@ -105,18 +105,18 @@ workflows:
           type: approval
           requires:
             - test
-          # filters: 
-          #   branches:
-          #     only: master   
+          filters: 
+            branches:
+              only: master   
       
       #Run deploy-test only when current branch only when the current branch is the master branch
       #Requires manual approval from CircleCI pipeline home page 
       - deploy-prod:
           requires: 
             - wait-deploy-prod-approval   
-          # filters: 
-          #   branches:
-          #     only: master
+          filters: 
+            branches:
+              only: master
 
       #Run deploy-test only when current branch is not the master branch        
       - deploy-test:
