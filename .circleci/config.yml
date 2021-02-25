@@ -48,16 +48,24 @@ jobs:
             make CONFIG_IS_SUBWOOFER=1 all
             make CONFIG_IS_SUBWOOFER=1 size
 
+
+
       - run: 
           command: |
             mkdir -p /tmp/workspace/firmware
             echo "Hello, world!" > /tmp/workspace/firmware/echo-output
-            
+
+            cd ~/esp32-firmware/
+            ls
+            cd build
+            cp esp32-firmware.bin /tmp/workspace/firmware
 
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - firmware/echo-output
+            - firmware/esp32-firmware.bin
+
 
   finalize-release: 
     working_directory: *working_dir_root
@@ -104,6 +112,10 @@ jobs:
             cd $DEPLOY_TOOLS_PATH/deploy_manager
             python3 file_encoder.py -h
 
+      - run:
+          command: |
+            cd /tmp/workspace/firmware/
+            ls 
 
       - run: |
           if [[ `cat /tmp/workspace/firmware/echo-output` == "Hello, world!" ]]; then
