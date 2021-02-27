@@ -11,20 +11,6 @@ references:
     attach_workspace:
       at: *workspace_root
 
-  # workspace_root_sat: &workspace_root_sat
-  #   /tmp/workspace/sat
-
-  # attach_workspace_sat: &attach_workspace_sat
-  #   attach_workspace:
-  #     at: *workspace_root_sat
-
-  # workspace_root_sub: &workspace_root_sub
-  #   /tmp/workspace/sub
-
-  # attach_workspace_sub: &attach_workspace_sub
-  #   attach_workspace:
-  #     at: *workspace_root_sub
-
   working_dir_root: &working_dir_root
     ~/esp32-firmware/
 
@@ -73,6 +59,7 @@ jobs:
             cd build
             cp esp32-firmware.bin /tmp/workspace/firmware/sub
 
+      #Put folder with firmware in a layer for the next job the requires this job
       - persist_to_workspace:
           root: *workspace_root
           paths:
@@ -109,6 +96,7 @@ jobs:
             cd build
             cp esp32-firmware.bin /tmp/workspace/firmware/sat
 
+      #Put folder with firmware in a layer for the next job the requires this job
       - persist_to_workspace:
           root: *workspace_root
           paths:
@@ -162,10 +150,15 @@ jobs:
             mkdir -p /tmp/workspace/firmware/sub/deploy/
             cp /tmp/workspace/firmware/sub/*.bin  /tmp/workspace/firmware/sub/deploy/
 
+      #Put folder with firmware in a layer for the next job the requires this job
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - firmware/sub/deploy/*
+
+      #Put the deploy firmware as artifact
+      - store_artifacts:
+          path: /tmp/workspace/firmware/sub/deploy/
 
 
   #Prepare and validate the firmware for a sat
@@ -197,61 +190,11 @@ jobs:
             mkdir -p /tmp/workspace/firmware/sat/deploy/
             cp /tmp/workspace/firmware/sat/*.bin  /tmp/workspace/firmware/sat/deploy/
 
+      #Put folder with firmware in a layer for the next job the requires this job
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - firmware/sat/deploy/*
-
-  #Deploy the sub firmware to the production environment [to be done]
-  deploy_prod_sub:
-    working_directory: *working_dir_root
-    docker:
-      - image: *deploy_tool_docker_img    
-    steps:
-      - *attach_workspace
-      - checkout
-      - run:
-          command: |
-            echo "Deploying firmware to production environment" 
-            echo $DEPLOY_TOOLS_PATH
-            cd $DEPLOY_TOOLS_PATH/deploy_manager
-            python3 deploy.py -h
-
-      #This command will show the /tmp/workspace/firmware/esp32-firmware, since a job in a higher level added this firmare to that layer.
-      #Addtionally the encoded firwmare in /tmp/workspace/firmware/deploy/ will be shown.
-      - run:
-          command: |
-            ls /tmp/workspace/firmware/
-            ls /tmp/workspace/firmware/sub/
-            ls /tmp/workspace/firmware/sub/deploy/
-
-      #Put the deploy firmware as artifact
-      - store_artifacts:
-          path: /tmp/workspace/firmware/sub/deploy/
-
-
-  #Deploy the sat firmware to the production environment [to be done]
-  deploy_prod_sat:
-    working_directory: *working_dir_root
-    docker:
-      - image: *deploy_tool_docker_img    
-    steps:
-      - *attach_workspace
-      - checkout
-      - run:
-          command: |
-            echo "Deploying firmware to production environment" 
-            echo $DEPLOY_TOOLS_PATH
-            cd $DEPLOY_TOOLS_PATH/deploy_manager
-            python3 deploy.py -h
-
-      #This command will show the /tmp/workspace/firmware/esp32-firmware, since a job in a higher level added this firmare to that layer.
-      #Addtionally the encoded firwmare in /tmp/workspace/firmware/deploy/ will be shown.
-      - run:
-          command: |
-            ls /tmp/workspace/firmware/
-            ls /tmp/workspace/firmware/sat/
-            ls /tmp/workspace/firmware/sat/deploy/
 
       #Put the deploy firmware as artifact
       - store_artifacts:
@@ -302,7 +245,7 @@ jobs:
             echo "Deploying firmware to test environment"
             echo $DEPLOY_TOOLS_PATH
             cd $DEPLOY_TOOLS_PATH/deploy_manager
-            python3 file_encoder.py -h
+            python3 deploy.py -h
 
       #This command will show the /tmp/workspace/firmware/esp32-firmware, since a job in a higher level added this firmare to that layer.
       #Addtionally the encoded firwmare in /tmp/workspace/firmware/deploy/ will be shown.
@@ -327,28 +270,7 @@ workflows:
     jobs:
       - build
       - build_sat
-
       - test
-
-      #Ensure manual approval before closing release
-      - wait-release-approval:
-          type: approval
-          requires:
-            - build 
-            - build_sat
-            - test
-          filters:
-            branches:
-              only:  /release\/.*/
-
-      - finalize_release: 
-          requires:
-            - wait-release-approval 
-          filters:
-            branches:
-              only:  /release\/.*/
-
-
 
       - prepare_and_validate_firmware_sub:
           requires:
@@ -357,8 +279,9 @@ workflows:
           filters:
             branches:
               only:  
-              -  master
-              -  /feature\/.*/ 
+              - master
+              - /feature\/.*/ 
+              - /release\/.*/
 
       - prepare_and_validate_firmware_sat:
           requires:
@@ -367,9 +290,27 @@ workflows:
           filters:
             branches:
               only:  
-              -  master
-              -  /feature\/.*/ 
+              - master
+              - /feature\/.*/ 
+              - /release\/.*/
 
+
+      #Ensure manual approval before closing release
+      - wait_release_approval:
+          type: approval
+          requires:
+            - prepare_and_validate_firmware_sub 
+            - prepare_and_validate_firmware_sat
+          filters:
+            branches:
+              only:  /release\/.*/
+
+      - finalize_release: 
+          requires:
+            - wait_release_approval 
+          filters:
+            branches:
+              only:  /release\/.*/
 
 
       # - wait_deploy_prod_approval_sub:
@@ -398,12 +339,21 @@ workflows:
             branches:
               only: master
 
+      #Wait until approval before deploy to pre-production environment
+      - wait_deploy_pre_prod_approval:
+          type: approval
+          requires:
+            - prepare_and_validate_firmware_sub
+            - prepare_and_validate_firmware_sat
+          filters: 
+            branches:
+              ignore: master 
+
 
       #Run deploy_pre_prod only when current branch is not the master branch        
       - deploy_pre_prod:
           requires: 
-            - prepare_and_validate_firmware_sub
-            - prepare_and_validate_firmware_sat
+            - wait_deploy_pre_prod_approval
           filters: 
             branches:
               ignore: master  
