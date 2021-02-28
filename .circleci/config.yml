@@ -370,24 +370,24 @@ workflows:
             branches:
               only: master
 
-      #Wait until approval before deploy to pre-production environment
-      - wait_deploy_pre_prod_approval:
-          type: approval
-          requires:
-            - prepare_and_validate_firmware_sub
-            - prepare_and_validate_firmware_sat
-          filters: 
-            branches:
-              ignore: master 
+      # #Wait until approval before deploy to pre-production environment
+      # - wait_deploy_pre_prod_approval:
+      #     type: approval
+      #     requires:
+      #       - prepare_and_validate_firmware_sub
+      #       - prepare_and_validate_firmware_sat
+      #     filters: 
+      #       branches:
+      #         ignore: master 
 
 
-      #Run deploy_pre_prod only when current branch is not the master branch        
-      - deploy_pre_prod:
-          requires: 
-            - wait_deploy_pre_prod_approval
-          filters: 
-            branches:
-              ignore: master  
+      # #Run deploy_pre_prod only when current branch is not the master branch        
+      # - deploy_pre_prod:
+      #     requires: 
+      #       - wait_deploy_pre_prod_approval
+      #     filters: 
+      #       branches:
+      #         ignore: master  
 
 
       - create_firmware_artifacts:
