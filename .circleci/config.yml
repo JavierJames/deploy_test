@@ -156,9 +156,9 @@ jobs:
           paths:
             - firmware/sub/deploy/*
 
-      #Put the deploy firmware as artifact
-      - store_artifacts:
-          path: /tmp/workspace/firmware/sub/deploy/
+      # #Put the deploy firmware as artifact
+      # - store_artifacts:
+      #     path: /tmp/workspace/firmware/sub/deploy/
 
 
   #Prepare and validate the firmware for a sat
@@ -196,9 +196,9 @@ jobs:
           paths:
             - firmware/sat/deploy/*
 
-      #Put the deploy firmware as artifact
-      - store_artifacts:
-          path: /tmp/workspace/firmware/sat/deploy/
+      # #Put the deploy firmware as artifact
+      # - store_artifacts:
+      #     path: /tmp/workspace/firmware/sat/deploy/
 
 
   deploy_prod:
@@ -263,6 +263,37 @@ jobs:
           path: /tmp/workspace/firmware/sub/deploy/
       - store_artifacts:
           path: /tmp/workspace/firmware/sat/deploy/
+
+
+
+create_firmware_artifacts:
+    working_directory: *working_dir_root
+    docker:
+      - image: *deploy_tool_docker_img    
+    steps:
+      - *attach_workspace
+      - checkout
+            
+
+      #This command will show the /tmp/workspace/firmware/esp32-firmware, since a job in a higher level added this firmare to that layer.
+      #Addtionally the encoded firwmare in /tmp/workspace/firmware/deploy/ will be shown.
+      - run:
+          command: |
+            echo "Extracting firmware as artifacts"
+            ls /tmp/workspace/firmware/
+            ls /tmp/workspace/firmware/sub/
+            ls /tmp/workspace/firmware/sub/deploy/
+            ls /tmp/workspace/firmware/sat/
+            ls /tmp/workspace/firmware/sat/deploy/
+
+
+      #Put the deploy firmware as artifact
+      - store_artifacts:
+          path: /tmp/workspace/firmware/sub/deploy/
+      - store_artifacts:
+          path: /tmp/workspace/firmware/sat/deploy/
+
+
 
 workflows:
   version: 2
@@ -357,3 +388,9 @@ workflows:
           filters: 
             branches:
               ignore: master  
+
+
+      - create_firmware_artifacts:
+          requires:
+            - prepare_and_validate_firmware_sub
+            - prepare_and_validate_firmware_sat
